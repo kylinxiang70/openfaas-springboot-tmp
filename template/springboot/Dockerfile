@@ -13,7 +13,7 @@ WORKDIR /home/app
 
 COPY . /home/app
 
-RUN mvn clean package
+RUN cd ./function && mvn clean package
 
 FROM openfaas/of-watchdog:0.7.6 as watchdog
 
