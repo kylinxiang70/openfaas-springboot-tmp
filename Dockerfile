@@ -13,7 +13,7 @@ WORKDIR /home/app
 
 COPY . /home/app
 
-RUN mvn clean package
+RUN mvn package
 
 FROM openfaas/of-watchdog:0.7.6 as watchdog
 
@@ -26,5 +26,6 @@ RUN chmod +x /usr/bin/fwatchdog
 WORKDIR /home/app
 
 COPY --from=builder /home/app/target/java-tmp-0.0.1-SNAPSHOT.jar ./java-tmp-0.0.1-SNAPSHOT.jar
+
 
 CMD java -jar -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap java-tmp-0.0.1-SNAPSHOT.jar
